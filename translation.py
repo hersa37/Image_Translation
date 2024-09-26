@@ -6,8 +6,10 @@ from PIL import ImageTk, Image
 def changeposition(panel, im):
     panel.moveto(im, x=hslider.get(), y=vslider.get())
 
+
 def shiftposition(cvs):
     x = hmanualtext.get()
+    try:
         x = int(x)
     except:
         x = 0
@@ -19,6 +21,7 @@ def shiftposition(cvs):
 
     hslider.set(hslider.get() + x)
     vslider.set(vslider.get() + y)
+
 
 # Main window
 root = Tk()
@@ -47,7 +50,7 @@ hslider = Scale(
     length=630,
     tickinterval=50,
     # Command yang dijalankan saat slider dipindah
-    command=lambda x, cvs=canvas, i=im: changeposition(cvs, i),
+    command=lambda cvs=canvas, i=im: changeposition(cvs, i),
 )
 hslider.pack()
 
@@ -61,7 +64,7 @@ vslider = Scale(
     length=700,
     tickinterval=50,
     # Command yang dijalankan saat slider dipindah. panggil changeposition
-    command=lambda y, cvs=canvas, i=im: changeposition(cvs, i),
+    command=lambda cvs=canvas, i=im: changeposition(cvs, i),
 )
 vslider.pack()
 
