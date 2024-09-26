@@ -6,6 +6,19 @@ from PIL import ImageTk, Image
 def changeposition(panel, im):
     panel.moveto(im, x=hslider.get(), y=vslider.get())
 
+def shiftposition(cvs):
+    x = hmanualtext.get()
+        x = int(x)
+    except:
+        x = 0
+    y = vmanualtext.get()
+    try:
+        y = int(y)
+    except:
+        y = 0
+
+    hslider.set(hslider.get() + x)
+    vslider.set(vslider.get() + y)
 
 # Main window
 root = Tk()
@@ -51,5 +64,30 @@ vslider = Scale(
     command=lambda y, cvs=canvas, i=im: changeposition(cvs, i),
 )
 vslider.pack()
+
+manualinput = Frame(root)
+manualinput.grid(row=10, column=0, rowspan=2, columnspan=10)
+
+manualshiftlabel = Label(manualinput, text="Input geser")
+manualshiftlabel.grid(row=0, column=0, rowspan=2)
+
+hmanuallabel = Label(manualinput, text="Horizontal")
+hmanuallabel.grid(row=0, column=1, padx=10)
+
+hmanualtext = Entry(manualinput, bg="white", width=5)
+hmanualtext.grid(row=0, column=2)
+
+vmanuallabel = Label(manualinput, text="Vertikal")
+vmanuallabel.grid(row=0, column=3, padx=10)
+
+vmanualtext = Entry(manualinput, bg="white", width=5)
+vmanualtext.grid(row=0, column=4, padx=10)
+
+confirmbutton = Button(
+    manualinput,
+    text="Confirm",
+    command=lambda cvs=canvas: shiftposition(cvs),
+)
+confirmbutton.grid(row=0, column=5, padx=10)
 
 root.mainloop()
