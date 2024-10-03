@@ -6,8 +6,10 @@ from PIL import ImageTk, Image
 def changeposition(panel, im):
     panel.moveto(im, x=hslider.get(), y=vslider.get())
 
+
 def shiftposition(cvs):
     x = hmanualtext.get()
+    try:
         x = int(x)
     except:
         x = 0
@@ -19,6 +21,7 @@ def shiftposition(cvs):
 
     hslider.set(hslider.get() + x)
     vslider.set(vslider.get() + y)
+
 
 # Main window
 root = Tk()
